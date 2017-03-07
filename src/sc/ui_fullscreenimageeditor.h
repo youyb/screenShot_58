@@ -63,7 +63,7 @@ public:
 
     void retranslateUi(QMainWindow *FullScreenImageEditor)
     {
-        FullScreenImageEditor->setWindowTitle(QApplication::translate("FullScreenImageEditor", "MainWindow", 0));
+        FullScreenImageEditor->setWindowTitle(QApplication::translate("FullScreenImageEditor", "ScreenShot", 0));
     } // retranslateUi
 
 };

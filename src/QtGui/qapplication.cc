@@ -70,7 +70,6 @@ void QApplicationWrap::ScreenCapture(const FunctionCallbackInfo<Value>& args) {
     QApplication* q = w->GetWrapped();
 
     QString imgDir;
-    QString iconDir;
     if( (args.Length() == 2) && args[0]->IsString() ) {
         String::Utf8Value arg(args[0]->ToString());
         imgDir = QString::fromStdString(*arg);

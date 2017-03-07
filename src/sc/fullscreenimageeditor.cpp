@@ -325,8 +325,19 @@ void FullScreenImageEditor::mouseReleaseEvent(QMouseEvent *e)
     if (e->button() == Qt::LeftButton) {
         if (getCanvasMode() == CanvasMode::SELECTING) {
             selectArea(e->x(), e->y());
-            setCanvasMode(CanvasMode::SELECTED);
-            this->update();
+            QDBG<<selectedArea.top()<<","<<selectedArea.left()<<" --- "<<selectedArea.bottom()<<","<<selectedArea.right();
+            if( (selectedArea.top() == selectedArea.bottom()) && (selectedArea.left() == selectedArea.right()) )
+            {
+                //fix bug: after sc starts, click left-button firstly, then should ignore it
+                QDBG<<"ignore lb......";
+                setCanvasMode(CanvasMode::IDLE);
+                this->update();
+            }
+            else
+            {
+                setCanvasMode(CanvasMode::SELECTED);
+                this->update();
+            }
         } else if (getCanvasMode() == CanvasMode::MOVING) {
             moveSelectedAreaLimitInScreen(e->x(), e->y());
             setCanvasMode(CanvasMode::SELECTED);
@@ -353,8 +364,9 @@ void FullScreenImageEditor::mouseDoubleClickEvent(QMouseEvent *e)
     if (e->button() == Qt::LeftButton) {
         QImage img;
         QDBG<<g_dpr;
-//        QDBG<<selectedArea.width()<<", "<<selectedArea.height();
-        if( (selectedArea.width() == 1) && (selectedArea.height() == 1) )
+        QDBG<<selectedArea.width()<<", "<<selectedArea.height();
+        if( ((selectedArea.width() == 1) && (selectedArea.height() == 1)) ||
+            ((selectedArea.width() == 10001) && (selectedArea.height() == 10001)) )
         {
             //exit if user not select rect
             myDispose();
@@ -376,7 +388,7 @@ void FullScreenImageEditor::mouseDoubleClickEvent(QMouseEvent *e)
         QApplication::clipboard()->setImage(img);
         QString defaultName = "Screenshot" + QDateTime::currentDateTime().toString("yyyyMMddhhmmss") + ".png";
         g_ImagePath = g_ImageDir.append(defaultName);
-        img.save(g_ImagePath, "png");
+        //img.save(g_ImagePath, "png");
         myDispose();
     }
 }
