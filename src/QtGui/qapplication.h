@@ -4,7 +4,10 @@
 #include <node.h>
 #include <node_object_wrap.h>
 #include <QApplication>
+#include <QMimeData>
+#include <QClipboard>
 
+extern int g_IsRunning;
 class QApplicationWrap : public node::ObjectWrap {
 public:
     static void Initialize(v8::Handle<v8::Object> target);
@@ -19,6 +22,7 @@ private:
     // Wrapped methods
     static void Exec(const v8::FunctionCallbackInfo<v8::Value>& args);
     static void ScreenCapture(const v8::FunctionCallbackInfo<v8::Value>& args);
+    static void GetFilePathFromClipboard(const v8::FunctionCallbackInfo<v8::Value>& args);
 
     // Wrapped object
     QApplication* q_;

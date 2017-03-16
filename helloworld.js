@@ -6,7 +6,7 @@ var save_dir = "/Users/yyb/out/";
 // var icon_dir = "/Users/yyb/work/electron/electron-quick-start";
 var app = new sc.Main;
 
-// console.log('image path: ' + app.screenCapture(dir));
+console.log('urls: ' + app.getFilePathFromClipboard());
 
 app.screenCapture(save_dir, function(str){
 	console.log(str);
