@@ -6,6 +6,7 @@
 #include <QApplication>
 #include <QMimeData>
 #include <QClipboard>
+#include <QFileInfo>
 
 extern int g_IsRunning;
 class QApplicationWrap : public node::ObjectWrap {

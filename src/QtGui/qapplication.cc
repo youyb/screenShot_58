@@ -214,16 +214,27 @@ void QApplicationWrap::GetFilePathFromClipboard(const FunctionCallbackInfo<Value
         QList<QUrl> list = mimeData->urls();
         for(int i=0; i<list.count(); i++)
         {
-            QDBG<<list.at(i).fileName();
             QDBG<<list.at(i).path();
-            if(!list.at(i).fileName().isEmpty())
+#if defined(Q_OS_WIN)
+            QString path = list.at(i).path().right(list.at(i).path().length()-1);
+#elif defined(Q_OS_MAC)
+            QString path = list.at(i).path();
+#endif
+            QDBG<<path;
+            QFileInfo fi(path);
+            if(fi.isFile())
             {
-                urls += list.at(i).path() + ",";
+                urls += path + ",";
             }
-            else
+            else if(fi.isDir())
             {
                 QDBG<<"dir found, skip it.";
             }
+            else
+            {
+                QDBG<<"others, skip it.";
+            }
+
         }
     }
     else
