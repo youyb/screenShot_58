@@ -1,0 +1,21 @@
+git status
+git add .
+git commit -m "solve mac memory link issue"
+git push
+
+
+qt creator快捷键：
+
+Alt + Tab: 切换已打开文件
+Ctrl + Shift + R： 全局修改变量名
+Ctrl + 1/2/3： 打开输出窗口
+F2 快速切换到 光标选中对象 的源码。
+F4 在 头文件(.h) 和 实现文件(.cpp) 之间进行切换。
+Ctrl + / 注释/取消注释选定内容。
+Ctrl + i 自动缩进选中代码。
+Ctrl + shift + up 将当前行的代码向上移动一行。
+Ctrl + shift + down 将当前行的代码向下移动一行。
+
+node.js调用c/c++参考 http://www.jianshu.com/p/857b4d38aba1
+
+https://nodejs.org/dist/latest-v7.x/docs/api/addons.html
